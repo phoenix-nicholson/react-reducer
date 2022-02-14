@@ -1,6 +1,24 @@
 import { useEffect, useState } from 'react'
 
 const pinkRGB = `rgb(236, 72, 153)`
+const initialCount = { count: 0 }
+
+function colorReducer(counter, action) {
+  switch (action.type) {
+    case 'increment': {
+      return { count: counter.count + 1 }
+    }
+    case 'decrement': {
+      return { count: counter.count - 1 }
+    }
+    case 'reset': {
+      return { count: 0 }
+    }
+    default: {
+      throw Error(`Unknown action: ${action.type}`)
+    }
+  }
+}
 
 export default function Counter() {
   const [count, setCount] = useState(0)
@@ -31,7 +49,6 @@ export default function Counter() {
   const reset = () => {
     setCount(0)
   }
-
   return (
     <main className="bg-black bg-opacity-90 min-h-screen flex flex-col items-center justify-center text-4xl text-pink-500">
       <h1 className="mb-5" style={{ color: currentColor }}>
